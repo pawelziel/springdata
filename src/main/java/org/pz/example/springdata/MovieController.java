@@ -13,6 +13,6 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getMovies(){
-        return movieService.getFromDao();
+        return movieService.getFromRepoo();
     }
 }
