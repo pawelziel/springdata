@@ -2,8 +2,6 @@ package org.pz.example.springdata;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,16 +13,7 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getAllMovies() {
-        return movieService.processAllMoviesInOrderOfNominations();
+        return movieService.getAllMoviesFromService();
     }
 
-    @GetMapping("/{id}")
-    public Movie getMovie(@PathVariable int id) {
-        return movieService.findById(id).orElseThrow();
-    }
-
-    @PostMapping("/{id}")
-    public Movie addMovie(Movie movie) {
-        return movieService.addMovie(movie);
-    }
 }

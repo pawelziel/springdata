@@ -7,5 +7,5 @@ public interface MovieDao {
 
     void deleteMovie(int id);
 
-    List<Movie> getAllMovies(Movie movie);
+    List<Movie> getAllMovies();
 }

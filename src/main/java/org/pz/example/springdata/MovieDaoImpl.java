@@ -26,7 +26,7 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
-    public List<Movie> getAllMovies(Movie movie) {
+    public List<Movie> getAllMovies() {
         return entityManager.createQuery("from Movie", Movie.class).getResultList();
     }
 }
