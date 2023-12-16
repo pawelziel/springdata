@@ -1,6 +1,8 @@
 package org.pz.example.springdata;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +14,9 @@ public class MovieService {
 
     public List<Movie> getFromRepoo() {
        // return movieDao.getAll();
-        return movieRepository.findAll();
+       // return movieRepository.findAll();
+      //  return movieRepository.findAll(PageRequest.of(1, 2));
+        return movieRepository.findByDirector("James Cameron", PageRequest.of(0, 2));
     }
 
 }
