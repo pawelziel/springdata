@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Entity
 public class Movie { //create table MOVIE (
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id; // ID int NOT NULL AUTO_INCREMENT,
 
     private String title; // TITLE varchar(255),

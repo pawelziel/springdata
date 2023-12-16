@@ -13,10 +13,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     public List<Movie> getFromRepoo() {
-       // return movieDao.getAll();
-       // return movieRepository.findAll();
-      //  return movieRepository.findAll(PageRequest.of(1, 2));
-        return movieRepository.findByDirector("James Cameron", PageRequest.of(0, 2));
+        return movieRepository.findAll();
     }
 
 }
