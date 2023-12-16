@@ -9,5 +9,10 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class MovieController {
+    private final MovieService movieService;
 
+    @GetMapping
+    public List<Movie> getMovies(){
+        return movieService.getFromDao();
+    }
 }

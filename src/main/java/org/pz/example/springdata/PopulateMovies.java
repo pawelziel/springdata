@@ -10,9 +10,11 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 @Component
 public class PopulateMovies implements ApplicationRunner {
+    private final MovieDao movieDao;
+
     @Override
     public void run(ApplicationArguments args) {
         Movie movie = new Movie(1, "Titanic", "20th Century Studios", "James Cameron", LocalDate.of(1997, 12, 19), 13);
-
+        movieDao.addMovie(movie);
     }
 }
