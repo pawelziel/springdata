@@ -14,6 +14,7 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getMovies(){
-        return movieService.getFromRepoo();
+      //  return movieService.getFromRepoByExaple();
+        return movieService.getFromRepoBySpec();
     }
 }

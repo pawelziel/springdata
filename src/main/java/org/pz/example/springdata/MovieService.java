@@ -1,7 +1,7 @@
 package org.pz.example.springdata;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +11,18 @@ import java.util.List;
 public class MovieService {
     private final MovieRepository movieRepository;
 
-    public List<Movie> getFromRepoo() {
-       // return movieDao.getAll();
-       // return movieRepository.findAll();
-      //  return movieRepository.findAll(PageRequest.of(1, 2));
-        return movieRepository.findByDirector("James Cameron", PageRequest.of(0, 2));
+    public List<Movie> getFromRepoByExaple() {
+        Movie exampleMovie = new Movie();
+        exampleMovie.setProducer("20th Century Studios");
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching().withIgnoreCase();
+        Example<Movie> example = Example.of(exampleMovie, exampleMatcher);
+        return movieRepository.findAll(example, Sort.by("title"));
+    }
+
+    public List<Movie> getFromRepoBySpec() {
+    return movieRepository.findAll(
+                MovieSpecification.jestFajny().or(MovieSpecification.directorLike("James%").and(MovieSpecification.sortedByTitle()))
+        );
     }
 
 }
