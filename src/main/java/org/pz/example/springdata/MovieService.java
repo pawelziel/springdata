@@ -9,13 +9,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MovieService {
     private final MovieDao movieDao;
+    private final MovieRepository movieRepository;
 
-    public List<Movie> getAllMoviesFromService() {
-        List<Movie> movieList =  movieDao.getAllMovies();
-        return movieList;
+    public List<Movie> getFromDao() {
+        return movieDao.getAllMovies();
     }
 
-
+    public List<Movie> getFromRepoo() {
+        return movieRepository.findAll();
+    }
 
 
 }
