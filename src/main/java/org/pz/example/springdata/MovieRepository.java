@@ -1,5 +1,6 @@
 package org.pz.example.springdata;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,14 +19,13 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> findAllByOrderByOscarNominations();
 
-    @Query("select m FROM Movie m where m.oscarNominations>10")
+    @Query("select m FROM Movie where m.oscarNominations>10")
     List<Movie> znajdzTylkoFajneFilmy();
-
 
     List<Movie> findAllByTitleLikeOrderByOscarNominations(String title);
 
-    @Query("select m from Movie m where m.oscarNominations>10 order by m.title")
-    List<Movie> znajdzTylkoFajneFilmyPosortowanePoTytule();
+
+    List<Movie> findByDirector(String director, Pageable pageable);
 
 
 }
