@@ -18,5 +18,14 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> findAllByOrderByOscarNominations();
 
-    
+    @Query("select m FROM Movie m where m.oscarNominations>10")
+    List<Movie> znajdzTylkoFajneFilmy();
+
+
+    List<Movie> findAllByTitleLikeOrderByOscarNominations(String title);
+
+    @Query("select m from Movie m where m.oscarNominations>10 order by m.title")
+    List<Movie> znajdzTylkoFajneFilmyPosortowanePoTytule();
+
+
 }
