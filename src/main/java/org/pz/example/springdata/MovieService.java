@@ -19,10 +19,21 @@ public class MovieService {
         return movieRepository.findAll(example, Sort.by("title"));
     }
 
-    public List<Movie> getFromRepoBySpec() {
-    return movieRepository.findAll(
-                MovieSpecification.jestFajny().or(MovieSpecification.directorLike("James%").and(MovieSpecification.sortedByTitle()))
-        );
+
+    public List<Movie> getFromRepoo() {
+        return movieRepository.findAll();
+    }
+
+    public Movie getFromRepoo(int id) {
+        return movieRepository.findById(id).orElseThrow();
+    }
+
+    public void delete(int id) {
+        movieRepository.deleteById(id);
+    }
+
+    public void addMovie(Movie m) {
+        movieRepository.save(m);
     }
 
 }
