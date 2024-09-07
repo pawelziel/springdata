@@ -1,32 +1,42 @@
 package org.pz.example.springdata;
 
+import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Limit;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
+@Transactional
 public interface MovieRepository extends JpaRepository<Movie, Integer> , JpaSpecificationExecutor<Movie> {
 
-    @Query("select m from Movie m where m.title = ?1")
-    Optional<Movie> znajdzPoTytule(String title);
-
-    List<Movie> findByReleaseDate(LocalDate date);
-
-    List<Movie> findByDirectorAndProducer(String director, String producer);
-
-    List<Movie> findAllByOrderByOscarNominations();
-
-    @Query("select m FROM Movie where m.oscarNominations>10")
-    List<Movie> znajdzTylkoFajneFilmy();
-
-    List<Movie> findAllByTitleLikeOrderByOscarNominations(String title);
 
 
-    List<Movie> findByDirector(String director, Pageable pageable);
+    List<Movie> findByTitleLikeOrderByOscarNominationsDesc(String title);
+
+
+    @Query("select m from Movie m where m.producer = ?1 and m.director = ?2")
+    List<Movie> findByProducerAndDirector(String producer, String director);
+
+    List<Movie> findTop12AllByOrderByReleaseDateDesc();
+
+
+    @Query("select m from Movie m where m.title = :tytul")
+    List<Movie> znajdzNaPodstawieTytulu(@Param("tytul") String t);
+
+    @Modifying
+    @Query(value = "delete FROM Movie m WHERE m.oscar_nominations=0", nativeQuery = true)
+    void deleteNotNominated();
+
+
+    Page<Movie> findAll(Pageable pageable);
+
 
 
 }

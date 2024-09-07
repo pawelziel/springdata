@@ -5,16 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RestController
 public class MovieController {
     private final MovieService movieService;
 
     @GetMapping
-    public List<Movie> getMovies(){
-      //  return movieService.getFromRepoByExaple();
-        return movieService.getFromRepoBySpec();
+    public Page<Movie> getMovies(){
+        return movieService.getFromRepo();
     }
 }
