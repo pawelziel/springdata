@@ -27,4 +27,6 @@ public class Movie { //create table MOVIE (
 
     private Integer oscarNominations; // OSCAR_NOMINATIONS int, PRIMARY KEY (ID));
 
+ //   private String absrtact;
+
 }

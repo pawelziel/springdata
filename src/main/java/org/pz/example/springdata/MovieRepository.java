@@ -1,6 +1,6 @@
 package org.pz.example.springdata;
 
-import jakarta.transaction.Transactional;
+
 import org.springframework.data.domain.Limit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,10 +10,12 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public interface MovieRepository extends JpaRepository<Movie, Integer> , JpaSpecificationExecutor<Movie> {
 
 
@@ -38,5 +40,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> , JpaSpec
     Page<Movie> findAll(Pageable pageable);
 
 
-
+    List<Movie> findAll();
 }
